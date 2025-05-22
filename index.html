@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anggun Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #2b0f3f, #4d1c3d);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+    }
+
+    /* Navbar Customization */
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.3); /* Slightly transparent background for navbar */
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background-color: #2b0f3f; /* Darker background on scroll */
+    }
+
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .nav-link.text-white {
+      transition: color 0.3s ease;
+    }
+
+    .nav-link.text-white:hover {
+      color: #db3c72 !important; /* Hover color for nav links */
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex; /* Use flexbox for alignment */
+      flex-direction: row; /* Default horizontal layout */
+      justify-content: center;
+      align-items: center;
+      padding: 50px 20px; /* Add padding */
+      text-align: left; /* Align text to left in hero section */
+      gap: 50px; /* Space between text and image */
+    }
+
+    .hero-content {
+      max-width: 600px; /* Limit content width */
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    .hero img {
+      width: 300px; /* Larger image */
+      height: 300px; /* Maintain aspect ratio */
+      object-fit: cover;
+      border: 5px solid #db3c72; /* Border around image */
+    }
+
+    /* General Section Styling */
+    section {
+      padding: 80px 0;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      font-weight: bold;
+      margin-bottom: 50px;
+      position: relative;
+      display: inline-block; /* To center the pseudo-element underline */
+      padding-bottom: 10px;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background-color: #db3c72; /* Red line as seen in the image */
+      border-radius: 2px;
+    }
+
+    /* About Section */
+    .about .row {
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .about img {
+      width: 250px; /* Adjust size for about image */
+      height: 250px;
+      object-fit: cover;
+      border: 5px solid #db3c72; /* Border around image */
+    }
+
+    .about .col-md-3 {
+      margin-right: 50px; /* Spacing for the image column */
+    }
+
+    .about .col-md-6 {
+      padding-left: 20px; /* Padding for the text column */
+    }
+
+    /* Services Section */
+    .card.bg-gradient {
+      background: linear-gradient(135deg, #ff5f6d, #8435a1);
+      border: none;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .card.bg-gradient:hover {
+      transform: translateY(-10px);
+    }
+
+    /* Skills Section */
+    .skills .progress {
+      height: 25px;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .skills .progress-bar {
+      background-color: #db3c72;
+      font-weight: bold;
+      color: white;
+    }
+
+    /* Projects Section */
+    .projects img {
+      height: 200px; /* Fixed height for consistent project image size */
+      object-fit: cover;
+      width: 100%; /* Ensure images take full width of their column */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Buttons */
+    .btn-danger {
+      background-color: #db3c72;
+      border-color: #db3c72;
+      font-weight: bold;
+      padding: 10px 25px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-danger:hover {
+      background-color: #a72d56;
+      border-color: #a72d56;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Image Hover Effects */
+    .img-fluid:hover,
+    .rounded-circle:hover {
+      transform: scale(1.03);
+      transition: transform 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #1a0823; /* Darker background for footer */
+      padding-top: 50px;
+      padding-bottom: 30px;
+    }
+
+    .footer h3 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .footer p {
+      margin-bottom: 8px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .navbar-collapse {
+        background-color: #2b0f3f; /* Solid background for collapsed menu */
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+      .navbar-nav {
+        align-items: center; /* Center nav items when collapsed */
+      }
+      .nav-item {
+        margin-bottom: 10px;
+      }
+      .hero {
+        flex-direction: column-reverse; /* Image above text on smaller screens */
+        text-align: center;
+        padding-top: 150px; /* More space from top for fixed navbar */
+        gap: 30px;
+      }
+      .hero-content {
+        max-width: 100%; /* Allow full width */
+      }
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .hero p {
+        width: 100%; /* Adjust width for smaller screens */
+      }
+      .hero img {
+        width: 200px;
+        height: 200px;
+      }
+      .about .row {
+        flex-direction: column;
+        gap: 30px; /* More space between image and text */
+      }
+      .about .col-md-3, .about .col-md-6 {
+        margin-right: 0;
+        padding-left: 0;
+        text-align: center; /* Center content in about section for smaller screens */
+      }
+      .about img {
+        margin-bottom: 20px;
+      }
+      h2 {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 60px 0;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .card.bg-gradient {
+        margin-bottom: 20px; /* Add space between cards in mobile view */
+      }
+      .skills .progress-bar {
+        font-size: 0.9rem;
+      }
+      .projects img {
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      .hero {
+        padding-top: 120px;
+      }
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .btn-danger {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+      }
+      .about img {
+        width: 180px;
+        height: 180px;
+      }
+      .projects img {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">A</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto gap-3">
+          <li class="nav-item"><a class="nav-link text-white" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#services">Service</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="btn btn-danger btn-sm" href="#footer">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header id="home" class="hero">
+    <div class="hero-content" data-aos="fade-right">
+      <h1 class="fw-bold display-4">Hello<br><span class="typing-text"></span></h1>
+      <p>saya pelajar di SMK 1 TENGARAN mengambil jurusan rpl | rekayasa perangkat lunak | saya mengambil keahlian untuk menjadi front end web developer</p>
+      <a href="#footer" class="btn btn-danger mt-2">Hire me</a>
+    </div>
+    <div class="hero-image" data-aos="fade-left">
+      <img src="about.png" alt="Anggun" class="rounded-circle">
+    </div>
+  </header>
+
+  <section id="about" class="about py-5">
+    <div class="container text-center" data-aos="fade-up">
+      <h2>About me</h2>
+      <div class="row justify-content-center align-items-center mt-4">
+        <div class="col-md-3 d-flex justify-content-center" data-aos="zoom-in">
+          <img src="header.png" class="rounded-circle" alt="About Anggun">
+        </div>
+        <div class="col-md-6 text-start" data-aos="fade-left">
+          <p>saya anggun saya bersekolah di SMKN 1 TENGARAN saya lahir pada tanggal 3 juni 2009 dan kini saya berusia 16 thn, alamat saya di Timpik 2/9 kec susukan kab Semarang. Saya di sekolah mengambil jurusan rpl rekayasa perangkat lunak dan saya memiliki hobi berenang dan melukis.</p>
+          <a href="#footer" class="btn btn-danger mt-2">Hire me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="services py-5 text-center">
+    <div class="container" data-aos="fade-up">
+      <h2>My Service</h2>
+      <div class="row mt-4">
+        <div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="card bg-gradient text-white p-3 h-100">
+            <h5>Website Design</h5>
+            <p>saya juga belajar membuat desain website di kelas 10</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="card bg-gradient text-white p-3 h-100">
+            <h5>e-commerce solution</h5>
+            <p>tidak hanya membuat desain website saya juga belajar membuat website e-commerce</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="card bg-gradient text-white p-3 h-100">
+            <h5>Mobile Deployment</h5>
+            <p>saya membuat website yang mobile friendly</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="skills py-5">
+    <div class="container" data-aos="fade-right">
+      <h2 class="text-center">My Skills</h2>
+      <div class="mt-4">
+        <p>HTML</p>
+        <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div></div>
+        <p>CSS</p>
+        <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div></div>
+        <p>JavaScript</p>
+        <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div></div>
+        <p>Bootstrap</p>
+        <div class="progress mb-3"><div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects py-5 text-center">
+    <div class="container" data-aos="fade-up">
+      <h2>My Projects</h2>
+      <div class="row mt-4">
+        <div class="col-md-4 col-sm-6 mb-3" data-aos="zoom-in">
+          <a href="project1-details.html" target="_blank"> <img src="Projects 1.jpg" class="img-fluid rounded" alt="Project 1">
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-3" data-aos="zoom-in" data-aos-delay="100">
+          <a href="project2-details.html" target="_blank"> <img src="Proyek 2.jpg" class="img-fluid rounded" alt="Project 2">
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-3" data-aos="zoom-in" data-aos-delay="200">
+          <a href="project3-details.html" target="_blank"> <img src="Projects 3 (1).jpg" class="img-fluid rounded" alt="Project 3">
+          </a>
+        </div>
+      <div class="row mt-4">
+        <div class="col-md-4 col-sm-6 mb-3" data-aos="zoom-in">
+          <a href="project4-details.html" target="_blank"> <img src="Projects 4 (1).jpg" class="img-fluid rounded" alt="Project 1">
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-3" data-aos="zoom-in" data-aos-delay="100">
+          <a href="project5-details.html" target="_blank"> <img src="Projects 5.jpg" class="img-fluid rounded" alt="Project 2">
+          </a>
+        </div>
+        <div class="col-md-4 col-sm-6 mb-3" data-aos="zoom-in" data-aos-delay="200">
+          <a href="project6-details.html" target="_blank"> <img src="Projects 6.jpg" class="img-fluid rounded" alt="Project 3">
+          </a>
+        </div>
+
+    </div>
+    </div>
+  </section>
+
+  <footer id="footer" class="footer py-4 text-center" data-aos="fade-up">
+    <div class="container">
+      <h3 class="mb-3">let's talk me</h3>
+      <p>Email: anggun@gmail.com</p>
+      <p>Phone: 85739728542</p>
+      <p>Alamat: Timpik 2/9 Susukan</p>
+      <div class="mt-3">
+        <span>&copy; 2025 Web Design. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000, /* Global duration for AOS animations */
+    once: true /* Whether animation should happen only once - off by default */
+  });
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Smooth scrolling for internal links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    new Typed('.typing-text', {
+      strings: ["I’m Anggun", "Frontend Developer", "Pelajar SMK 1 TENGARAN"],
+      typeSpeed: 60,
+      backSpeed: 30,
+      loop: true
+    });
+  });
+</script>
+
+</body>
+</html>
